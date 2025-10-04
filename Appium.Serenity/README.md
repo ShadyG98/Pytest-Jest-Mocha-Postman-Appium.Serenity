@@ -6,77 +6,68 @@
 
 
 ## 🇬🇧 Explanation in English
-🧩 What is Appium?
+# 🧩 What is Appium?
 
-Appium is an automation tool for native, hybrid, and web mobile applications, supporting both Android and iOS platforms.
-It is based on the WebDriver (W3C) protocol, which means tests communicate with the device through HTTP requests to the Appium server.
+* Appium is an automation tool for native, hybrid, and web mobile applications, supporting both Android and iOS platforms.
+* It is based on the WebDriver (W3C) protocol, which means tests communicate with the device through HTTP requests to the Appium server.
+* Appium acts as a bridge between your test and the device:
+* The test (e.g., written in Serenity BDD) sends commands.
+* Appium translates them and executes them on the device/emulator.
+* It returns responses (status, errors, elements, etc.).
 
-Appium acts as a bridge between your test and the device:
+## 🧠 What is Serenity?
 
-The test (e.g., written in Serenity BDD) sends commands.
-
-Appium translates them and executes them on the device/emulator.
-
-It returns responses (status, errors, elements, etc.).
-
-🧠 What is Serenity?
-
-Serenity BDD is a framework that helps you write more readable and maintainable automated tests, integrating with tools like JUnit, Cucumber, and Appium.
+* Serenity BDD is a framework that helps you write more readable and maintainable automated tests, integrating with tools like JUnit, Cucumber, and Appium.
 With Serenity you can:
+* Easily manage Appium capabilities.
+* Generate automatic reports and traceability.
+* Structure business-readable test scenarios.
 
-Easily manage Appium capabilities.
+## 🧪 Where does Postman fit?
 
-Generate automatic reports and traceability.
-
-Structure business-readable test scenarios.
-
-🧪 Where does Postman fit?
-
-Postman can be used to test the Appium server directly, without writing any code.
+* Postman can be used to test the Appium server directly, without writing any code.
 This helps you:
 
-Verify that Appium is running properly.
-
-Manually create sessions.
-
-Send HTTP commands to a connected device.
+* Verify that Appium is running properly.
+* Manually create sessions.
+* Send HTTP commands to a connected device.
 
 It’s useful for understanding how Appium communicates internally and debugging setup issues before running Serenity tests.
 
-🌐 Appium Base Endpoint
+## 🌐 Appium Base Endpoint
+`
 http://localhost:4723/wd/hub/session
-
+`
 URL Breakdown
-Part	Meaning
-localhost	Your local machine where Appium is running.
-4723	Default Appium server port.
-/wd/hub	WebDriver Hub: the entry point for the WebDriver protocol.
-/session	Endpoint used to create or manage an automation session.
-⚙️ What is /wd/hub?
+* Part	Meaning
+* localhost	Your local machine where Appium is running.
+* 4723	Default Appium server port.
+* /wd/hub	WebDriver Hub: the entry point for the WebDriver protocol.
+* /session	Endpoint used to create or manage an automation session.
 
-/wd/hub is the main entry point for the Appium server.
-All tools (Serenity, Postman, or test scripts) communicate with Appium through this route.
+## ⚙️ What is /wd/hub?
 
-Appium interprets WebDriver commands sent to /wd/hub and passes them to the specific driver (AndroidDriver, IOSDriver, etc.), executing actions on the device or emulator.
+* /wd/hub is the main entry point for the Appium server.
+* All tools (Serenity, Postman, or test scripts) communicate with Appium through this route.
+* Appium interprets WebDriver commands sent to /wd/hub and passes them to the specific driver (AndroidDriver, IOSDriver, etc.), executing actions on the device or emulator.
+* In short: /wd/hub is the central hub that translates HTTP requests into real device actions.
 
-In short: /wd/hub is the central hub that translates HTTP requests into real device actions.
+## 🔄 What is /session?
 
-🔄 What is /session?
-
-The /session endpoint is used to create and manage Appium sessions.
-A session represents an active connection between Appium and a device/emulator with defined capabilities (test environment settings).
+* The /session endpoint is used to create and manage Appium sessions.
+* A session represents an active connection between Appium and a device/emulator with defined capabilities (test environment settings).
 
 📤 Create a Session (POST)
 
 Example using Postman:
 
 Request:
-
+`
 POST http://localhost:4723/wd/hub/session
-
+`
 
 Body (JSON):
-
+```
 {
   "capabilities": {
     "platformName": "Android",
@@ -86,55 +77,58 @@ Body (JSON):
     "appium:app": "C:\\path\\to\\yourApp.apk"
   }
 }
-
+```
 
 Response:
-
+```
 {
   "value": {
     "sessionId": "f1234567-89ab-cdef-0123-456789abcdef",
     "capabilities": { ... }
   }
 }
-
+```
 
 The sessionId identifies your active session.
-Then you can interact with the device using:
 
+Then you can interact with the device using:
+```
 POST /wd/hub/session/{sessionId}/element
 GET  /wd/hub/session/{sessionId}/source
 DELETE /wd/hub/session/{sessionId}
+```
+## 🧩 Appium + Serenity
 
-🧩 Appium + Serenity
+* When using Serenity BDD with Appium, you don’t need to create the session manually.
+* Serenity automatically sends the POST /wd/hub/session request with your capabilities, defined in your configuration files.
 
-When using Serenity BDD with Appium, you don’t need to create the session manually.
-Serenity automatically sends the POST /wd/hub/session request with your capabilities, defined in your configuration files.
-
+```
 Example (serenity.conf or appium.properties):
 appium.hub = http://localhost:4723/wd/hub
 appium.platformName = Android
 appium.deviceName = emulator-5554
 appium.automationName = UiAutomator2
 appium.app = C:\\path\\to\\yourApp.apk
-
+```
 
 With this, Serenity connects automatically to the Appium server, creates the session, and manages the entire test lifecycle.
 
-✅ Summary
-Tool	Role
-Appium	Server executing commands on the device (WebDriver protocol).
-/wd/hub	Central communication point between client (test or Postman) and Appium.
-/session	Endpoint where the test session is created and controlled.
-Postman	Allows manual Appium testing and endpoint inspection.
-Serenity	BDD framework that automates communication with Appium and manages tests.
+## ✅ Summary
 
-🧾 Conclusion:
+* Tool	Role
+* Appium	Server executing commands on the device (WebDriver protocol).
+* /wd/hub	Central communication point between client (test or Postman) and Appium.
+* /session	Endpoint where the test session is created and controlled.
+* Postman	Allows manual Appium testing and endpoint inspection.
+* Serenity	BDD framework that automates communication with Appium and manages tests.
+
+ ## 🧾 Conclusion:
 
 Appium + Serenity + Postman form a powerful combination for mobile test automation, endpoint validation, and ensuring smooth communication between the automation server and the device under test.
 
 ## 🇪🇸 Explicación en Español
 
-# 🚀 Introducción a Appium con Serenity y Postman
+## 🚀 Introducción a Appium con Serenity y Postman
 
 ## 🧩 ¿Qué es Appium?
 
@@ -190,9 +184,8 @@ http://localhost:4723/wd/hub/session
 ## ⚙️ ¿Qué es `/wd/hub`?
 
 `/wd/hub` es el **punto de entrada principal del servidor Appium**.  
-Todas las herramientas (Serenity, Postman, o scripts de test) se comunican con Appium a través de esta ruta.  
-
-Appium interpreta los comandos WebDriver que llegan a `/wd/hub` y los envía al **driver correspondiente** (AndroidDriver, IOSDriver, etc.), ejecutando las acciones en el dispositivo o emulador.
+* Todas las herramientas (Serenity, Postman, o scripts de test) se comunican con Appium a través de esta ruta.  
+* Appium interpreta los comandos WebDriver que llegan a `/wd/hub` y los envía al **driver correspondiente** (AndroidDriver, IOSDriver, etc.), ejecutando las acciones en el dispositivo o emulador.
 
 > En resumen: `/wd/hub` es el *hub central* que traduce las requests HTTP a acciones reales en el dispositivo.
 
@@ -200,16 +193,17 @@ Appium interpreta los comandos WebDriver que llegan a `/wd/hub` y los envía al 
 
 ## 🔄 ¿Qué es `/session`?
 
-El endpoint `/session` se usa para **crear y manejar sesiones de Appium**.  
-Una *sesión* representa una **conexión activa** entre Appium y un dispositivo/emulador con ciertas **capabilities** (configuraciones de entorno).
+* El endpoint `/session` se usa para **crear y manejar sesiones de Appium**.  
+* Una *sesión* representa una **conexión activa** entre Appium y un dispositivo/emulador con ciertas **capabilities** (configuraciones de entorno).
 
 ### 📤 Crear una sesión (POST)
 
 Ejemplo en **Postman**:
 
 **Request:**
+`
 POST http://localhost:4723/wd/hub/session
-
+`
 
 **Body (JSON):**
 ```json
@@ -231,25 +225,29 @@ Response:
   }
 }
 
-El campo sessionId identifica tu sesión activa.
-Luego podés interactuar con el dispositivo enviando requests como:
+```
 
+- El campo sessionId identifica tu sesión activa.
+- Luego podés interactuar con el dispositivo enviando requests como:
+
+```
 POST /wd/hub/session/{sessionId}/element
 GET  /wd/hub/session/{sessionId}/source
 DELETE /wd/hub/session/{sessionId}
+```
 
 🧩 Appium + Serenity
 
-Cuando usás Serenity BDD con Appium, no necesitás crear la sesión manualmente.
-Serenity lo hace automáticamente, enviando internamente la misma request POST /wd/hub/session con tus capabilities, definidas en los archivos de configuración.
+- Cuando usás Serenity BDD con Appium, no necesitás crear la sesión manualmente.
+- Serenity lo hace automáticamente, enviando internamente la misma request POST /wd/hub/session con tus capabilities, definidas en los archivos de configuración.
 
 Ejemplo de configuración (serenity.conf o appium.properties):
-
+```
 appium.hub = http://localhost:4723/wd/hub
 appium.platformName = Android
 appium.deviceName = emulator-5554
 appium.automationName = UiAutomator2
 appium.app = C:\\ruta\\tuApp.apk
-
+```
 Con esto, Serenity se conecta automáticamente al servidor Appium, crea la sesión y gestiona todo el ciclo de vida del test.
 
