@@ -3,6 +3,80 @@
 - 🇬🇧 [English](#-explanation-in-english)
 
 ---
+## 🇬🇧 Explanation in English
+
+## 🇬🇧 Explanation in English
+
+# 🧪 QA & Testing Tools for Developers
+
+Overview of popular **code, API, and mobile/web automation testing tools**, their uses, differences, and recommendations.
+
+---
+
+## 🔹 Main Tools
+
+| Tool           | Type                           | Main Use                                   | Details & Advantages |
+|----------------|--------------------------------|--------------------------------------------|----------------------|
+| **Pytest**     | Testing framework (Python)     | Unit, integration, and functional tests in Python | Very flexible and powerful. Supports fixtures, test parametrization, and plugins. Ideal for automated testing in Python projects. |
+| **Jest**       | Testing framework (JavaScript/TypeScript) | Unit and integration testing | Native integration with React and other JS frameworks. Fast, supports mocks, coverage, and snapshot testing. Easy to set up for modern front-end and back-end projects. |
+| **Mocha**      | Testing framework (JavaScript) | Unit and integration testing | Flexible and extensible with libraries like Chai for assertions and Sinon for mocks. Ideal for Node.js and pure JS projects. |
+| **Postman**    | API Testing & Automation       | Functional testing of REST and SOAP APIs | Allows creating test collections, running automated tests, and validating responses. Compatible with Newman for CI/CD integration. |
+| **Appium**     | Mobile testing framework       | Automation of tests on native, hybrid, and web mobile apps (Android/iOS) | Open Source, WebDriver-based. Supports multiple programming languages (Java, Python, JS, C#). Ideal for mobile application QA. |
+| **Serenity BDD** | Automation and reporting framework | Automated testing with a BDD approach and detailed reporting | Extends Selenium and Appium. Integrates with Cucumber and JUnit. Generates clear, traceable reports. Excellent for teams using BDD and quality metrics. |
+
+---
+
+## 🔹 Key Differences
+
+- **Pytest / Jest / Mocha:** Focused on code-level testing (unit and integration).  
+- **Postman:** Designed for API testing.  
+- **Appium:** Dedicated to mobile app automation across platforms.  
+- **Serenity:** Focused on BDD, reporting, and automated test management, integrating with Selenium/Appium.  
+
+---
+
+## 🔹 Conceptual Testing Pipeline
+
+Recommended basic flow for an automated testing pipeline:
+
+1. **Code commit**  
+2. **Unit tests (Pytest/Jest/Mocha)**  
+3. **Integration & API tests (Postman/Newman)**  
+4. **End-to-End mobile/web tests (Appium/Serenity)**  
+5. **Results reporting (Serenity Reports)**  
+
+> This flow ensures both business logic and final user experience are properly validated.
+
+---
+
+## 🔹 Usage Recommendations
+
+1. **Pytest:** For Python projects, unit testing, and continuous integration setups.  
+2. **Jest:** For modern frontend or Node.js projects; includes mocks and snapshot testing.  
+3. **Mocha:** For Node.js projects requiring flexibility and modularity.  
+4. **Postman:** For manual and automated API testing.  
+5. **Appium:** For QA automation of Android/iOS mobile apps.  
+6. **Serenity BDD:** For BDD-focused projects with advanced reporting needs.  
+
+---
+
+## 🔹 References
+
+- [Pytest](https://docs.pytest.org/en/7.4.x/)  
+- [Jest](https://jestjs.io/)  
+- [Mocha](https://mochajs.org/)  
+- [Postman](https://www.postman.com/)  
+- [Appium](https://appium.io/)  
+- [Serenity BDD](https://serenity-bdd.github.io/)  
+
+---
+
+## 🔹 Contributions
+
+Pull Requests are welcome to add new tools, best practices, or usage examples.
+
+---
+
 
 ## 🇪🇸 Explicación en Español
 
