@@ -190,73 +190,75 @@ http://localhost:4723/wd/hub/session/{{sessionId}}
 ![TestChrome](Img/DeleteSessionId.png)
 
 
-🇪🇸 Explicación en Español
-🚀 Introducción a Appium con Serenity y Postman
-🧩 ¿Qué es Appium?
+## 🇪🇸 Explicación en Español
+
+# 🚀 Introducción a Appium con Serenity y Postman
+
+##🧩 ¿Qué es Appium?
 
 Appium es una herramienta de automatización de pruebas para aplicaciones móviles nativas, híbridas y web, tanto en Android como en iOS.
 Se basa en el protocolo WebDriver (W3C), lo que significa que los tests se comunican con el dispositivo mediante peticiones HTTP al servidor Appium.
 
-Appium actúa como un intermediario entre tu test y el dispositivo:
+* Appium actúa como un intermediario entre tu test y el dispositivo:
 
-El test (por ejemplo, escrito en Serenity BDD) envía comandos.
+* El test (por ejemplo, escrito en Serenity BDD) envía comandos.
 
-Appium los traduce y los ejecuta en el dispositivo/emulador.
+* Appium los traduce y los ejecuta en el dispositivo/emulador.
 
-Devuelve las respuestas (estado, errores, elementos, etc.).
+* Devuelve las respuestas (estado, errores, elementos, etc.).
 
-🧠 ¿Qué es Serenity?
+## 🧠 ¿Qué es Serenity?
 
 Serenity BDD es un framework que permite escribir tests automatizados más legibles y mantenibles, integrándose con herramientas como JUnit, Cucumber y Appium.
 Con Serenity podés:
 
-Administrar las capabilities de Appium fácilmente.
+* Administrar las capabilities de Appium fácilmente.
 
-Generar reportes automáticos y trazabilidad.
+* Generar reportes automáticos y trazabilidad.
 
-Estructurar escenarios de negocio legibles.
+* Estructurar escenarios de negocio legibles.
 
-🧪 ¿Dónde entra Postman?
+## 🧪 ¿Dónde entra Postman?
 
 Postman puede usarse para probar el servidor Appium directamente, sin necesidad de escribir código.
 Esto sirve para:
 
-Verificar que Appium esté corriendo correctamente.
+* Verificar que Appium esté corriendo correctamente.
 
-Crear una sesión manualmente.
+* Crear una sesión manualmente.
 
-Enviar comandos HTTP a un dispositivo conectado.
+* Enviar comandos HTTP a un dispositivo conectado.
 
 Así podés inspeccionar cómo funciona internamente Appium y depurar configuraciones antes de integrarlo con Serenity.
 
-🌐 Endpoint base de Appium
+## 🌐 Endpoint base de Appium
 ```
 http://localhost:4723/wd/hub/session
 ```
 Desglose de la URL
-Parte	-> Significado
-localhost -> 	Tu máquina local donde corre Appium.
-4723 -> 	Puerto por defecto del servidor Appium.
-/wd/hub ->	WebDriver Hub: el punto de entrada del protocolo WebDriver.
-/session -> 	Endpoint para crear o gestionar una sesión de automatización.
+* Parte	-> Significado
+* localhost -> 	Tu máquina local donde corre Appium.
+* 4723 -> 	Puerto por defecto del servidor Appium.
+* /wd/hub ->	WebDriver Hub: el punto de entrada del protocolo WebDriver.
+* /session -> 	Endpoint para crear o gestionar una sesión de automatización.
 
-⚙️ ¿Qué es /wd/hub?
+## ⚙️ ¿Qué es /wd/hub?
 
-/wd/hub es el punto de entrada principal del servidor Appium.
+* /wd/hub es el punto de entrada principal del servidor Appium.
 
-Todas las herramientas (Serenity, Postman o scripts de test) se comunican con Appium a través de esta ruta.
+* Todas las herramientas (Serenity, Postman o scripts de test) se comunican con Appium a través de esta ruta.
 
-Appium interpreta los comandos WebDriver que llegan a /wd/hub y los envía al driver correspondiente (AndroidDriver, IOSDriver, etc.), ejecutando las acciones en el dispositivo o emulador.
+* Appium interpreta los comandos WebDriver que llegan a /wd/hub y los envía al driver correspondiente (AndroidDriver, IOSDriver, etc.), ejecutando las acciones en el dispositivo o emulador.
 
-En resumen: /wd/hub es el hub central que traduce las requests HTTP en acciones reales del dispositivo.
+* En resumen: /wd/hub es el hub central que traduce las requests HTTP en acciones reales del dispositivo.
 
-🔄 ¿Qué es /session?
+## 🔄 ¿Qué es /session?
 
-El endpoint /session se usa para crear y manejar sesiones de Appium.
+* El endpoint /session se usa para crear y manejar sesiones de Appium.
 
-Una sesión representa una conexión activa entre Appium y un dispositivo/emulador con ciertas capabilities (configuraciones de entorno).
+* Una sesión representa una conexión activa entre Appium y un dispositivo/emulador con ciertas capabilities (configuraciones de entorno).
 
-📤 Crear una sesión (POST)
+## 📤 Crear una sesión (POST)
 
 Request:
 
@@ -294,11 +296,11 @@ GET  /wd/hub/session/{sessionId}/source
 DELETE /wd/hub/session/{sessionId}
 ```
 
-🧩 Appium + Serenity
+## 🧩 Appium + Serenity
 
-Cuando usás Serenity BDD con Appium, no necesitás crear la sesión manualmente.
+* Cuando usás Serenity BDD con Appium, no necesitás crear la sesión manualmente.
 
-Serenity lo hace automáticamente, enviando internamente la misma POST /wd/hub/session con tus capabilities.
+* Serenity lo hace automáticamente, enviando internamente la misma POST /wd/hub/session con tus capabilities.
 
 Ejemplo (serenity.conf o appium.properties):
 ```
@@ -311,15 +313,17 @@ appium.app = C:\\ruta\\tuApp.apk
 
 Serenity se conecta automáticamente al servidor Appium, crea la sesión y gestiona todo el ciclo de vida del test.
 
-🧩 Ejemplo en Postman
+## 🧩 Ejemplo en Postman
 
 Para la primera petición se utilizó:
 
+![TestChrome](Img/CreateSession.png)
+
 Se agregaron dos headers:
 
-Key	Value ->	Description
-Content-Type  application/json ->	Indica que el cuerpo de la petición está en formato JSON
-Accept	application/json ->	(Opcional) indica que esperas una respuesta JSON
+* Key	Value ->	Description
+* Content-Type  application/json ->	Indica que el cuerpo de la petición está en formato JSON
+* Accept	application/json ->	(Opcional) indica que esperas una respuesta JSON
 
 Luego se guardó la variable sessionId creando un Environment en Postman y agregando en Tests (Scripts):
 ```
@@ -337,12 +341,18 @@ console.log("No se encontró sessionId en la respuesta");
 
 Con la variable guardada, se puede redirigir con:
 
+```
 http://localhost:4723/wd/hub/session/{{sessionId}}/url
+```
+![TestChrome](Img/NavigateToURL.png)
 
 
 ❌ Eliminar sesión
 
 Finalmente, se elimina la sesión usando su ID:
 
-![TestChrome](Img/DeleteSessionId.png)
+```
+http://localhost:4723/wd/hub/session/{{sessionId}}
+```
 
+![TestChrome](Img/DeleteSessionId.png)
