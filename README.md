@@ -5,8 +5,6 @@
 ---
 ## 🇬🇧 Explanation in English
 
-## 🇬🇧 Explanation in English
-
 # 🧪 QA & Testing Tools for Developers
 
 Overview of popular **code, API, and mobile/web automation testing tools**, their uses, differences, and recommendations.
