@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "87338f27-22c4-4b77-8bd0-0ba79b362a18",
+		"name": "My Collection",
+		"description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49019835",
+		"_collection_link": "https://brenda-giselle-escobar2014-2599979.postman.co/workspace/brenda-escobar's-Workspace~2e96804b-79f2-4db1-8738-7056ba13db55/collection/49019835-87338f27-22c4-4b77-8bd0-0ba79b362a18?action=share&source=collection_link&creator=49019835"
+	},
+	"item": [
+		{
+			"name": "CreateSession",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"if (jsonData && jsonData.value && jsonData.value.sessionId) {\r",
+							"    var sessionId = jsonData.value.sessionId;\r",
+							"    console.log(\"Session ID:\", sessionId);\r",
+							"    pm.environment.set(\"sessionId\", sessionId);\r",
+							"} else {\r",
+							"    console.log(\"No se encontró sessionId en la respuesta\");\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Pre-request script should not access pm.response as response is not available yet",
+							"// Remove the existing code from pre-request script",
+							"// The sessionId extraction and environment variable setting should be done in the post-response script",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"capabilities\": {\r\n    \"alwaysMatch\": {\r\n      \"platformName\": \"Android\",\r\n      \"platformVersion\": \"14.0\",\r\n      \"browserName\": \"Chrome\",\r\n      \"deviceName\": \"Small Phone\",\r\n      \"automationName\": \"UiAutomator2\",\r\n      \"chromedriverExecutableDir\": \"C:\\\\Users\\\\Escob\\\\chromedrivers\"\r\n    }\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4723/wd/hub/session",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4723",
+					"path": [
+						"wd",
+						"hub",
+						"session"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteSession",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"capabilities\": {\r\n    \"alwaysMatch\": {\r\n      \"platformName\": \"Android\",\r\n      \"platformVersion\": \"14.0\",\r\n      \"browserName\": \"Chrome\",\r\n      \"deviceName\": \"Small Phone\",\r\n      \"automationName\": \"UiAutomator2\",\r\n      \"chromedriverExecutableDir\": \"C:\\\\Users\\\\Escob\\\\chromedrivers\"\r\n    }\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4723/wd/hub/session/{{sessionId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4723",
+					"path": [
+						"wd",
+						"hub",
+						"session",
+						"{{sessionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NavigateToURL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"url\": \"https://www.google.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4723/wd/hub/session/{{sessionId}}/url",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4723",
+					"path": [
+						"wd",
+						"hub",
+						"session",
+						"{{sessionId}}",
+						"url"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Server Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4723/wd/hub/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4723",
+					"path": [
+						"wd",
+						"hub",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
